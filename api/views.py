@@ -1,10 +1,14 @@
 import json
 
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
+from django.core import serializers
+
+from rest_framework import viewsets
 
 from .models import Task
+from .serializers import TaskSerializer
 
 class TaskView(View):
 
@@ -70,3 +74,13 @@ class TaskView(View):
             datos = {'message' : f"No hay tareas con el id {pk}"}
         return JsonResponse(datos)
 
+class TaskViewXML(View):
+    
+    def get(self, request):
+        data = serializers.serialize("xml", Task.objects.all())
+        return HttpResponse(data)
+    
+
+class TaskViewSet(viewsets.ModelViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
