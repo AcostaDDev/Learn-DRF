@@ -22,3 +22,10 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('api.urls')),
 ]
+
+
+from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
+
+""" for user in User.objects.all():
+    Token.objects.get_or_create(user=user) """      # Crea un token por cada usuario
