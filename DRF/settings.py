@@ -122,3 +122,5 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
+
+FIXTURE_DIRS = [ BASE_DIR / 'fixtures' ]
